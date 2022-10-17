@@ -20,7 +20,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
-            Console.WriteLine("Author Menu");
+            Console.WriteLine("Journal Menu");
             Console.WriteLine(" 1) List Journals");
             Console.WriteLine(" 2) Author Details");
             Console.WriteLine(" 3) Add Journal");
@@ -64,10 +64,10 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void List()
         {
-            List<Journal> authors = _journalRepository.GetAll();
-            foreach (Journal journal in authors)
+            List<Journal> journals = _journalRepository.GetAll();
+            foreach (Journal journal in journals)
             {
-                Console.WriteLine(journal);
+                Console.WriteLine(journal.Title);
             }
         }
 
@@ -80,11 +80,11 @@ namespace TabloidCLI.UserInterfaceManagers
 
             Console.WriteLine(prompt);
 
-            List<Journal> authors = _journalRepository.GetAll();
+            List<Journal> journals = _journalRepository.GetAll();
 
-            for (int i = 0; i < authors.Count; i++)
+            for (int i = 0; i < journals.Count; i++)
             {
-                Journal journal = authors[i];
+                Journal journal = journals[i];
                 //Console.WriteLine($" {i + 1}) {journal.FullName}");
             }
             Console.Write("> ");
@@ -93,7 +93,7 @@ namespace TabloidCLI.UserInterfaceManagers
             try
             {
                 int choice = int.Parse(input);
-                return authors[choice - 1];
+                return journals[choice - 1];
             }
             catch (Exception ex)
             {
@@ -107,14 +107,15 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine("New Journal");
             Journal journal = new Journal();
 
-            Console.Write("First Name: ");
+            Console.Write("Title: ");
             journal.Title = Console.ReadLine();
 
-            Console.Write("Last Name: ");
+            Console.Write("Content: ");
             journal.Content = Console.ReadLine();
 
-            Console.Write("CreateDateTime: ");
-            //journal.CreateDateTime = Console.ReadLine();
+            journal.CreateDateTime = DateTime.Now;
+
+
 
             _journalRepository.Insert(journal);
         }

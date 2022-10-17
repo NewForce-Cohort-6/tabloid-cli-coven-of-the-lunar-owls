@@ -20,7 +20,7 @@ namespace TabloidCLI.Repositories
                     cmd.CommandText = @"SELECT Id,
                                                Title,
                                                Content,
-                                               CreateDateTime,
+                                               CreateDateTime
                                           FROM Journal";
 
                     List<Journal> journals = new List<Journal>();
@@ -73,7 +73,8 @@ namespace TabloidCLI.Repositories
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                 Title = reader.GetString(reader.GetOrdinal("Title")),
-                                Content = reader.GetString(reader.GetOrdinal("Content"))
+                                Content = reader.GetString(reader.GetOrdinal("Content")),
+                                CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime"))
                             };
                         }
                     //}
@@ -91,9 +92,21 @@ namespace TabloidCLI.Repositories
                 }
             }
         }
-        public void Insert(Journal entry)
+        public void Insert(Journal journal)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO Journal (Title, Content, CreateDateTime )
+                                                     VALUES (@title, @content, @createdatetime)";
+                    cmd.Parameters.AddWithValue("@title", journal.Title);
+                    cmd.Parameters.AddWithValue("@content", journal.Content);
+                    cmd.Parameters.AddWithValue("@createdatetime", journal.CreateDateTime);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
         public void Update(Journal entry)
         {
