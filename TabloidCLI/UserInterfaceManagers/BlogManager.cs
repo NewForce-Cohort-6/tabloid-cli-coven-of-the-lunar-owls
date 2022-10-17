@@ -24,7 +24,8 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
-            Console.WriteLine("Blog Menu");
+            Console.WriteLine();
+            Console.WriteLine("==Blog Menu==");
             Console.WriteLine(" 1) List Blogs");
             Console.WriteLine(" 2) Blog Details");
             Console.WriteLine(" 3) Add Blog");
@@ -68,6 +69,7 @@ namespace TabloidCLI.UserInterfaceManagers
         private void List()
         {
             List<Blog> blogs = _blogRepository.GetAll();
+            Console.WriteLine();
             foreach (Blog blog in blogs)
             {
                 Console.WriteLine(blog);
@@ -76,6 +78,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private Blog Choose(string prompt = null)
         {
+            Console.WriteLine();
             if (prompt == null)
             {
                 prompt = "Please select a Blog";
@@ -106,6 +109,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Add()
         {
+            Console.WriteLine();
             Console.WriteLine("New Blog");
             Blog blog = new Blog();
 
@@ -120,6 +124,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Edit()
         {
+            Console.WriteLine();
             Blog blogToEdit = Choose("Which blog would you like to edit?");
             if (blogToEdit == null)
             {
@@ -145,6 +150,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Remove()
         {
+            Console.WriteLine();
             Blog blogToDelete = Choose("Which blog would you like to remove?");
             if (blogToDelete != null)
             {
