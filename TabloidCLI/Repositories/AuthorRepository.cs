@@ -114,7 +114,7 @@ namespace TabloidCLI
                     cmd.ExecuteNonQuery();
                 }
             }
-        }
+        } 
 
         public void Update(Author author)
         {
