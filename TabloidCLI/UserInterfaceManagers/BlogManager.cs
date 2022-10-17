@@ -51,12 +51,12 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "3":
                     Add();
                     return this;
-                //case "4":
-                //    Edit();
-                //    return this;
-                //case "5":
-                //    Remove();
-                //    return this;
+                case "4":
+                    Edit();
+                    return this;
+                case "5":
+                    Remove();
+                    return this;
                 case "0":
                     return _parentUI;
                 default:
@@ -118,38 +118,38 @@ namespace TabloidCLI.UserInterfaceManagers
             _blogRepository.Insert(blog);
         }
 
-        //private void Edit()
-        //{
-        //    Blog blogToEdit = Choose("Which blog would you like to edit?");
-        //    if (blogToEdit == null)
-        //    {
-        //        return;
-        //    }
+        private void Edit()
+        {
+            Blog blogToEdit = Choose("Which blog would you like to edit?");
+            if (blogToEdit == null)
+            {
+                return;
+            }
 
-        //    Console.WriteLine();
-        //    Console.WriteLine("New title (blank to leave unchanged): ");
-        //    string title = Console.ReadLine();
-        //    if (!string.IsNullOrWhiteSpace(title))
-        //    {
-        //        blogToEdit.Title = title;
-        //    }
-        //    Console.Write("New URL (blank to leave unchanged): ");
-        //    string url  = Console.ReadLine();
-        //    if (!string.IsNullOrWhiteSpace(url))
-        //    {
-        //        blogToEdit.Url = url;
-        //    }
+            Console.WriteLine();
+            Console.WriteLine("New title (blank to leave unchanged): ");
+            string title = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                blogToEdit.Title = title;
+            }
+            Console.Write("New URL (blank to leave unchanged): ");
+            string url = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(url))
+            {
+                blogToEdit.Url = url;
+            }
 
-        //    _blogRepository.Update(blogToEdit);          
-        //}
+            _blogRepository.Update(blogToEdit);
+        }
 
-        //private void Remove()
-        //{
-        //    Blog blogToDelete = Choose("Which blog would you like to remove?");
-        //    if (blogToDelete != null)
-        //    {
-        //        _blogRepository.Delete(blogToDelete.Id);
-        //    }
-        //}
+        private void Remove()
+        {
+            Blog blogToDelete = Choose("Which blog would you like to remove?");
+            if (blogToDelete != null)
+            {
+                _blogRepository.Delete(blogToDelete.Id);
+            }
+        }
     }
 }
