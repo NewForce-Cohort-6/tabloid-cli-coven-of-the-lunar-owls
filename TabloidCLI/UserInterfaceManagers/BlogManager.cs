@@ -51,12 +51,12 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "3":
                     Add();
                     return this;
-                case "4":
-                    Edit();
-                    return this;
-                case "5":
-                    Remove();
-                    return this;
+                //case "4":
+                //    Edit();
+                //    return this;
+                //case "5":
+                //    Remove();
+                //    return this;
                 case "0":
                     return _parentUI;
                 default:
