@@ -59,9 +59,8 @@ namespace TabloidCLI.UserInterfaceManagers
                     Edit();
                     return this;
                 case "5":
-                    //Remove();
-                    //return this;
-                    throw new NotImplementedException();
+                    Remove();
+                   return this;
                 case "0":
                     return _parentUI;
                 default:
@@ -168,6 +167,17 @@ namespace TabloidCLI.UserInterfaceManagers
         }
         // Edit end
 
+        // Remove start
+        private void Remove()
+        {
+            Post postToDelete = Choose("Which post would you like to remove?");
+            if (postToDelete != null)
+            {
+                _postRepository.Delete(postToDelete.Id);
+            }
+        }
+        // Remove end
+        // 
         // ChooseTheAuthor start
         private Author ChooseTheAuthor(string prompt = null)
         {
