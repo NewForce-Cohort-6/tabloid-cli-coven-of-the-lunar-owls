@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using TabloidCLI.Models;
 
 namespace TabloidCLI.UserInterfaceManagers
@@ -55,9 +56,8 @@ namespace TabloidCLI.UserInterfaceManagers
                     Add();
                     return this;
                 case "4":
-                    //Edit();
-                    //return this;
-                    throw new NotImplementedException();
+                    Edit();
+                    return this;
                 case "5":
                     Remove();
                    return this;
@@ -140,6 +140,32 @@ namespace TabloidCLI.UserInterfaceManagers
             _postRepository.Insert(post);
         }
         // Add end
+        // Edit start
+        private void Edit()
+        {
+            Post postToEdit = Choose("Which post would you like to edit?");
+            if (postToEdit == null)
+            {
+                return;
+            }
+
+            Console.WriteLine();
+            Console.Write("New Title (blank to leave unchanged: ");
+            string title = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                postToEdit.Title = title;
+            }
+            Console.Write("New URL (blank to leave unchanged: ");
+            string url = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(url))
+            {
+                postToEdit.Url = url; 
+            }
+
+            _postRepository.Update(postToEdit);
+        }
+        // Edit end
 
         // Remove start
         private void Remove()
