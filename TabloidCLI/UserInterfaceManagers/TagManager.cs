@@ -19,7 +19,8 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
-            Console.WriteLine("Tag Menu");
+            Console.WriteLine();
+            Console.WriteLine("==Tag Menu==");
             Console.WriteLine(" 1) List Tags");
             Console.WriteLine(" 2) Add Tag");
             Console.WriteLine(" 3) Edit Tag");
@@ -52,11 +53,18 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void List()
         {
-            throw new NotImplementedException();
+            Console.WriteLine();
+            List<Tag> tags = _tagRepository.GetAll();
+
+            foreach(Tag tag in tags)
+            {
+                Console.WriteLine(tag);
+            }
         }
 
         private void Add()
         {
+            Console.WriteLine();
             Console.WriteLine("Type the tag you'd like to add.");
             Console.Write(">");
 
@@ -70,11 +78,13 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Edit()
         {
+            Console.WriteLine();
             throw new NotImplementedException();
         }
 
         private void Remove()
         {
+            Console.WriteLine();
             throw new NotImplementedException();
         }
     }
