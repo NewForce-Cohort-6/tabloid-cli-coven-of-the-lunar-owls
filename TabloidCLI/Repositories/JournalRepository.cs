@@ -108,14 +108,38 @@ namespace TabloidCLI.Repositories
                 }
             }
         }
-        public void Update(Journal entry)
+        public void Update(Journal journal)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Journal SET Title = @title,
+                                       Content = @content 
+                                       CreateDateTime =@createdatetime, 
+                                       WHERE id = @id";
+                    cmd.Parameters.AddWithValue("@title",journal.Title);
+                    cmd.Parameters.AddWithValue("@content",journal.Content);
+                    cmd.Parameters.AddWithValue("@createdatetime",journal.CreateDateTime);
+                    cmd.Parameters.AddWithValue("@id", journal.Id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE FROM Journal WHERE id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
 
