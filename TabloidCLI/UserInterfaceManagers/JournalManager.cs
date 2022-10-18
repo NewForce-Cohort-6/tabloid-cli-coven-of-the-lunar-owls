@@ -129,6 +129,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Edit()
         {
+            Console.WriteLine();
             Journal journalToEdit = Choose("Which journal would you like to edit?");
             if (journalToEdit == null)
             {
@@ -136,23 +137,17 @@ namespace TabloidCLI.UserInterfaceManagers
             }
 
             Console.WriteLine();
-            Console.Write("New first name (blank to leave unchanged: ");
+            Console.Write("New Title (blank to leave unchanged: ");
             string title = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(title))
             {
                 journalToEdit.Title = title;
             }
-            Console.Write("New last name (blank to leave unchanged: ");
+            Console.Write("New content (blank to leave unchanged: ");
             string content = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(content))
             {
                 journalToEdit.Content = content;
-            }
-            Console.Write("New bio (blank to leave unchanged: ");
-            string bio = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(bio))
-            {
-                //journalToEdit.CreateDateTime = bio;
             }
 
             _journalRepository.Update(journalToEdit);
