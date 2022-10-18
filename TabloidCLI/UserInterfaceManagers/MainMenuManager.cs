@@ -39,7 +39,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine(" 4) Post Management");
             Console.WriteLine(" 5) Tag Management");
             Console.WriteLine(" 6) Search by Tag");
-            Console.WriteLine(" 7) Change background");
+            Console.WriteLine(" 7) Change Background");
 
             Console.WriteLine(" 0) Exit");
 

@@ -26,7 +26,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine(" 2) Yellow");
             Console.WriteLine(" 3) Green");
             Console.WriteLine(" 4) Blue");
-            Console.WriteLine(" 5) Magenta");
+            Console.WriteLine(" 5) Fuchsia");
             Console.WriteLine(" 6) White");
             Console.WriteLine(" 7) Gray");
             Console.WriteLine(" 8) Default");
