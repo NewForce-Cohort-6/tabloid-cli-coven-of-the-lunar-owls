@@ -147,7 +147,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
             _blogRepository.Update(blogToEdit);
         }
-
+//Bug: Blogs that have posts associated with them cannot be deleted. Add exception message in the future. -JG
         private void Remove()
         {
             Console.WriteLine();
