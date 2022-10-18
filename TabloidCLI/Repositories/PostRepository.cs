@@ -78,8 +78,8 @@ namespace TabloidCLI
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"@""SELECT p.id,
-                                               p.Title As PostTitle,
+                    cmd.CommandText = @"SELECT p.id as postId,
+                                               p.Title As Title,
                                                p.URL AS PostUrl,
                                                p.PublishDateTime,
                                                p.AuthorId,
@@ -102,8 +102,8 @@ namespace TabloidCLI
                     {
                         post = new Post()
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Title = reader.GetString(reader.GetOrdinal("PostTitle")),
+                            Id = reader.GetInt32(reader.GetOrdinal("postId")),
+                            Title = reader.GetString(reader.GetOrdinal("Title")),
                             Url = reader.GetString(reader.GetOrdinal("PostUrl")),
                             PublishDateTime = reader.GetDateTime(reader.GetOrdinal("PublishDateTime")),
                             Author = new Author()
@@ -141,7 +141,7 @@ namespace TabloidCLI
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT p.id,
-                                               p.Title As PostTitle,
+                                               p.Title As Title,
                                                p.URL AS PostUrl,
                                                p.PublishDateTime,
                                                p.AuthorId,
@@ -164,7 +164,7 @@ namespace TabloidCLI
                         Post post = new Post()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Title = reader.GetString(reader.GetOrdinal("PostTitle")),
+                            Title = reader.GetString(reader.GetOrdinal("Title")),
                             Url = reader.GetString(reader.GetOrdinal("PostUrl")),
                             PublishDateTime = reader.GetDateTime(reader.GetOrdinal("PublishDateTime")),
                             Author = new Author()
