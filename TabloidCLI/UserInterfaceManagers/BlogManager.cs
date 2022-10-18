@@ -24,7 +24,8 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
-            Console.WriteLine("Blog Menu");
+            Console.WriteLine();
+            Console.WriteLine("==Blog Menu==");
             Console.WriteLine(" 1) List Blogs");
             Console.WriteLine(" 2) Blog Details");
             Console.WriteLine(" 3) Add Blog");
@@ -51,12 +52,12 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "3":
                     Add();
                     return this;
-                //case "4":
-                //    Edit();
-                //    return this;
-                //case "5":
-                //    Remove();
-                //    return this;
+                case "4":
+                    Edit();
+                    return this;
+                case "5":
+                    Remove();
+                    return this;
                 case "0":
                     return _parentUI;
                 default:
@@ -68,6 +69,7 @@ namespace TabloidCLI.UserInterfaceManagers
         private void List()
         {
             List<Blog> blogs = _blogRepository.GetAll();
+            Console.WriteLine();
             foreach (Blog blog in blogs)
             {
                 Console.WriteLine(blog);
@@ -76,6 +78,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private Blog Choose(string prompt = null)
         {
+            Console.WriteLine();
             if (prompt == null)
             {
                 prompt = "Please select a Blog";
@@ -106,6 +109,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Add()
         {
+            Console.WriteLine();
             Console.WriteLine("New Blog");
             Blog blog = new Blog();
 
@@ -118,38 +122,40 @@ namespace TabloidCLI.UserInterfaceManagers
             _blogRepository.Insert(blog);
         }
 
-        //private void Edit()
-        //{
-        //    Blog blogToEdit = Choose("Which blog would you like to edit?");
-        //    if (blogToEdit == null)
-        //    {
-        //        return;
-        //    }
+        private void Edit()
+        {
+            Console.WriteLine();
+            Blog blogToEdit = Choose("Which blog would you like to edit?");
+            if (blogToEdit == null)
+            {
+                return;
+            }
 
-        //    Console.WriteLine();
-        //    Console.WriteLine("New title (blank to leave unchanged): ");
-        //    string title = Console.ReadLine();
-        //    if (!string.IsNullOrWhiteSpace(title))
-        //    {
-        //        blogToEdit.Title = title;
-        //    }
-        //    Console.Write("New URL (blank to leave unchanged): ");
-        //    string url  = Console.ReadLine();
-        //    if (!string.IsNullOrWhiteSpace(url))
-        //    {
-        //        blogToEdit.Url = url;
-        //    }
+            Console.WriteLine();
+            Console.WriteLine("New title (blank to leave unchanged): ");
+            string title = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                blogToEdit.Title = title;
+            }
+            Console.Write("New URL (blank to leave unchanged): ");
+            string url = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(url))
+            {
+                blogToEdit.Url = url;
+            }
 
-        //    _blogRepository.Update(blogToEdit);          
-        //}
+            _blogRepository.Update(blogToEdit);
+        }
 
-        //private void Remove()
-        //{
-        //    Blog blogToDelete = Choose("Which blog would you like to remove?");
-        //    if (blogToDelete != null)
-        //    {
-        //        _blogRepository.Delete(blogToDelete.Id);
-        //    }
-        //}
+        private void Remove()
+        {
+            Console.WriteLine();
+            Blog blogToDelete = Choose("Which blog would you like to remove?");
+            if (blogToDelete != null)
+            {
+                _blogRepository.Delete(blogToDelete.Id);
+            }
+        }
     }
 }
