@@ -31,6 +31,7 @@ namespace TabloidCLI
         }
 //----------------END INSERT-------------
 
+
 //---------------GET ALL------------------
         public List<Blog> GetAll()
         {
@@ -61,6 +62,7 @@ namespace TabloidCLI
             }
         }
 //-----------END GET ALL--------------------
+
 
 //---------------GET------------------------
         public Blog Get(int id)
@@ -110,6 +112,7 @@ namespace TabloidCLI
         }
 //--------------------END GET-------------------------
 
+
 //----------------------UPDATE-----------------------------
     public void Update(Blog blog)
         {
@@ -128,6 +131,7 @@ namespace TabloidCLI
         }
 //--------------------END UPDATE---------------------------
 
+
 //----------------------DELETE-----------------------------
        public void Delete(int id)
         {
@@ -144,7 +148,11 @@ namespace TabloidCLI
         }
 //------------------------END DELETE-------------------------------------
 
+
+
+
 //-----------------------INSERT TAG--------------------------------------
+
 
         public void InsertTag(Blog blog, Tag tag)
         {
@@ -163,5 +171,27 @@ namespace TabloidCLI
 //------------------------END INSERT TAG-------------------------------------
 
 
+
+//-----------------------DELETE TAG--------------------------------------
+        public void DeleteTag(int blogId, int tagId)
+        {
+            using(SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE FROM BlogTag WHERE BlogId = @blogId AND TagId = @tagId";
+                    cmd.Parameters.AddWithValue("@blogId", blogId);
+                    cmd.Parameters.AddWithValue("@tagId", tagId);
+                    cmd.ExecuteNonQuery ();                     
+                }
+            }
+        }
+//-----------------------END DELETE TAG--------------------------------------
+
+    } //End Internal Class
+} //End Namespace
+
     }
 }
+
