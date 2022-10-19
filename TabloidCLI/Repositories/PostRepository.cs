@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 using Microsoft.Data.SqlClient;
 using TabloidCLI.Models;
 using TabloidCLI.Repositories;
@@ -84,6 +85,8 @@ namespace TabloidCLI
                                                p.PublishDateTime,
                                                p.AuthorId,
                                                p.BlogId,
+                                               t.id as TagId,
+                                               t.Name,
                                                a.FirstName,
                                                a.LastName,
                                                a.Bio,
@@ -91,7 +94,9 @@ namespace TabloidCLI
                                                b.URL AS BlogUrl
                                           FROM Post p 
                                                LEFT JOIN Author a on p.AuthorId = a.Id
-                                               LEFT JOIN Blog b on p.BlogId = b.Id 
+                                               LEFT JOIN Blog b on p.BlogId = b.Id
+                                               LEFT JOIN PostTag pt ON p.Id = pt.PostId       
+                                               LEFT JOIN Tag t ON t.Id = pt.TagId
                                           WHERE p.id = @id";
                     cmd.Parameters.AddWithValue("id", id);
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -100,6 +105,9 @@ namespace TabloidCLI
 
                     while (reader.Read())
                     {
+                        if (post == null)
+                        { 
+
                         post = new Post()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("postId")),
@@ -120,6 +128,17 @@ namespace TabloidCLI
                                 Url = reader.GetString(reader.GetOrdinal("BlogUrl")),
                             }
                         };
+                        }
+
+                        if (!reader.IsDBNull(reader.GetOrdinal("TagId")))
+                        {
+                            post.Tags.Add(new Tag()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("TagId")),
+                                Name = reader.GetString(reader.GetOrdinal("Name")),
+                            });
+                        }
+
                     }
 
                     reader.Close();
@@ -152,9 +171,11 @@ namespace TabloidCLI
                                                b.Title AS BlogTitle,
                                                b.URL AS BlogUrl
                                           FROM Post p 
-                                               LEFT JOIN Author a on p.AuthorId = a.Id
-                                               LEFT JOIN Blog b on p.BlogId = b.Id 
-                                         WHERE p.AuthorId = @authorId";
+                                               LEFT JOIN Author a ON p.AuthorId = a.Id
+                                               LEFT JOIN Blog b ON p.BlogId = b.Id 
+                                                                                      
+
+                                               WHERE p.AuthorId = @authorId";
                     cmd.Parameters.AddWithValue("@authorId", authorId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
