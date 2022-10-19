@@ -43,7 +43,8 @@ namespace TabloidCLI.UserInterfaceManagers
                     View();
                     return this;
                 case "2":
-                    throw new NotImplementedException();
+                    ViewBlogPosts();
+                    return this;
                 case "3":
                     AddTag();
                     return this;
@@ -124,6 +125,18 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 Console.WriteLine("Invalid Selection. Not tags will be removed.");
             }
+        }
+
+
+        private void ViewBlogPosts()
+        {
+            List<Post> posts = _postRepository.GetByBlog(_blogId);
+            foreach(Post post in posts)
+            {
+                Console.WriteLine();
+                Console.WriteLine($"--{post.Title} by {post.Author.FirstName} {post.Author.LastName} {post.Url}");
+            }
+            Console.WriteLine();
         }
 
     }
