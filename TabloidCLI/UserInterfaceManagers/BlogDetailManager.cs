@@ -99,6 +99,7 @@ namespace TabloidCLI.UserInterfaceManagers
             }
         }
 
+
         private void RemoveTag()
         {
             Blog blog = _blogRepository.Get(_blogId);
@@ -125,6 +126,7 @@ namespace TabloidCLI.UserInterfaceManagers
                 Console.WriteLine("Invalid Selection. Not tags will be removed.");
             }
         }
+
 
     }
 }

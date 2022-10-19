@@ -149,7 +149,11 @@ namespace TabloidCLI
 //------------------------END DELETE-------------------------------------
 
 
+
+
 //-----------------------INSERT TAG--------------------------------------
+
+
         public void InsertTag(Blog blog, Tag tag)
         {
             using (SqlConnection conn= Connection)
@@ -165,6 +169,7 @@ namespace TabloidCLI
             }
         }
 //------------------------END INSERT TAG-------------------------------------
+
 
 
 //-----------------------DELETE TAG--------------------------------------
@@ -186,3 +191,7 @@ namespace TabloidCLI
 
     } //End Internal Class
 } //End Namespace
+
+    }
+}
+
