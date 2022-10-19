@@ -100,6 +100,7 @@ namespace TabloidCLI.UserInterfaceManagers
             }
         }
 
+
         private void RemoveTag()
         {
             Blog blog = _blogRepository.Get(_blogId);
